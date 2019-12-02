@@ -78,4 +78,6 @@ void rra(val_t *j);
 void rrb(val_t *j);
 
 void rrr(val_t *j);
+void create_struc(val_t *val, int argc);
+void initialise_struc(val_t *val, int argc, char **argv, int a);
 #endif /* !MY_H_ */
