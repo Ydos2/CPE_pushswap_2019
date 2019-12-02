@@ -17,9 +17,9 @@ int main (int argc, char **argv)
     initialise_struc(val, argc, argv, a);
     argc--;
     choose(val);
-    for (int o = 0; o != val->list_a; o++, a++)
-        val->array_bubble[a] = val->l_a[o];
-    for (int o = 0; o != val->list_b; o++, a++)
-        val->array_bubble[a] = val->l_b[o];
+    free(val->array_bubble);
+    free(val->l_a);
+    free(val->l_b);
+    free (val);
     return (0);
 }
