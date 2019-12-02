@@ -13,15 +13,13 @@ DIRMAIN		=./main_dos/*.c
 
 SRC		=	push_swap.c		\
 			param_1.c		\
-			param_2.c		\
-			param_3.c
+			param_2.c
 
 SRC_TESTS	=	criterion.c
 
 SRC_O	=	push_swap.o		\
 			param_1.o		\
-			param_2.o		\
-			param_3.o
+			param_2.o
 
 COMPIL		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC)
 COMPIL_DEBUG		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC) -g3

@@ -28,18 +28,3 @@ void rb(val_t *j)
     }
     j->l_b[z-1] = a;
 }
-
-void rr(val_t *j)
-{
-
-}
-
-void rra(val_t *j)
-{
-
-}
-
-void rrb(val_t *j)
-{
-
-}
