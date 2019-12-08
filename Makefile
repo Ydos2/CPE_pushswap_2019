@@ -25,7 +25,7 @@ COMPIL		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC)
 COMPIL_DEBUG		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC) -g3
 COMPIL_TEST		= gcc $(SRC) -g3 -L $(DIRLIB) $(DIRMAIN) $(DIRTEST) --coverage -lcriterion -lmy -l csfml-graphics -o $(EXEC_TEST)
 EXEC		= push_swap
-EXEC_TEST		= tests_push_swap
+EXEC_TEST		= my_tests_push_swap
 RUN_TESTS	=	./$(EXEC_TEST)
 RUN_VALGRIND	=	valgrind --leak-resolution=high --num-callers=40 --track-origins=yes ./$(EXEC)
 

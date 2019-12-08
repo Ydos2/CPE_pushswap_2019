@@ -11,6 +11,8 @@ int main (int argc, char **argv)
 {
     int a = 0;
 
+    if (argc == 1)
+        return (84);
     val_t *val = NULL;
     val = malloc(sizeof(val_t));
     create_struc(val, argc);

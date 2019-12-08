@@ -59,14 +59,18 @@ void create_struc(val_t *val, int argc)
 
 void initialise_struc(val_t *val, int argc, char **argv, int a)
 {
-    int z = 0;
+    int z = 0, t = 0, mult_moins = 0;
 
-    for (int i = 1, j = 0; i != argc; i++, j++) {
-        z = 0;
-        for (int t = 0; argv[i][t] != '\0'; t++) {
+    for (int i = 1, j = 0; i != argc; i++, j++, z = 0) {
+        t = 0, mult_moins = 0;
+        if (argv[i][0] == '-')
+            t = 1, mult_moins = 1;
+        for (; argv[i][t] != '\0'; t++) {
             z = z * 10;
             z += argv[i][t] - 48;
         }
+        if (mult_moins == 1)
+            z = z * -1;
         val->array_bubble[j] = z;
     }
     for (int o = 0; o != val->list_a; o++, a++)
