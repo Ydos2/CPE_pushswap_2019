@@ -26,23 +26,23 @@ void choose(val_t *j)
 
 void parssing_min(val_t *j)
 {
-    int min_size = 2147483647;
-    int actu_size = 2147483647;
-    int nbr_turn = 0;
+    int min_size = 2147483647, actu_size = 2147483647;
+    int nbr_turn = 0, middle = 0, z = 0;
     int size_actu = j->size;
 
-    min_size = 2147483647;
-    for (int z = 0; z != size_actu; z++) {
+    for (z = 0; z != size_actu; z++) {
         actu_size = j->l_a[z];
         if (actu_size < min_size) {
             min_size = actu_size;
             nbr_turn = z;
         }
     }
-    for (; j->l_a[0] != min_size;) {
-        ra(j);
-        write(1, "ra ", 3);
-    }
+    middle = z/2;
+    for (; j->l_a[0] != min_size;)
+        if (nbr_turn <= middle)
+            ra(j);
+        else
+            rra(j);
     pb(j);
     write(1, "pb ", 3);
     size_actu--;

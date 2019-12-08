@@ -73,6 +73,7 @@ void pb(val_t *j);
 
 void ra(val_t *j);
 void rb(val_t *j);
+void rra(val_t *j);
 
 void create_struc(val_t *val, int argc);
 void initialise_struc(val_t *val, int argc, char **argv, int a);
