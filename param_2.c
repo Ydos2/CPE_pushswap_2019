@@ -16,7 +16,13 @@ void ra(val_t *j)
         j->l_a[y] = j->l_a[z];
     }
     j->l_a[z-1] = a;
-    write(1, "ra ", 3);
+    j->buffer[j->buffer_int] = 'r';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = 'a';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = ' ';
+    j->buffer_int++;
+    initialisation_buffer(j);
 }
 
 void rb(val_t *j)
@@ -28,7 +34,13 @@ void rb(val_t *j)
         j->l_b[y] = j->l_b[z];
     }
     j->l_b[z-1] = a;
-    write(1, "rb ", 3);
+    j->buffer[j->buffer_int] = 'r';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = 'b';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = ' ';
+    j->buffer_int++;
+    initialisation_buffer(j);
 }
 
 void rra(val_t *j)
@@ -43,5 +55,25 @@ void rra(val_t *j)
     for (int k = b-1; b != 0;  b--, k--)
         j->l_a[b] = j->l_a[k];
     j->l_a[0] = a;
-    write(1, "rra ", 4);
+    j->buffer[j->buffer_int] = 'r';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = 'r';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = 'a';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = ' ';
+    j->buffer_int++;
+    initialisation_buffer(j);
+}
+
+void set_pb(val_t *j)
+{
+    pb(j);
+    j->buffer[j->buffer_int] = 'p';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = 'b';
+    j->buffer_int++;
+    j->buffer[j->buffer_int] = ' ';
+    j->buffer_int++;
+    initialisation_buffer(j);
 }

@@ -21,6 +21,8 @@ typedef struct val {
     int list_a;
     int list_b;
     int size;
+    int buffer_int;
+    char buffer[800];
 } val_t;
 
 void my_putchar(char c);
@@ -74,8 +76,10 @@ void pb(val_t *j);
 void ra(val_t *j);
 void rb(val_t *j);
 void rra(val_t *j);
+void set_pb(val_t *j);
 
 void create_struc(val_t *val, int argc);
 void initialise_struc(val_t *val, int argc, char **argv, int a);
 void parssing_min(val_t *j);
+void initialisation_buffer(val_t *j);
 #endif /* !MY_H_ */

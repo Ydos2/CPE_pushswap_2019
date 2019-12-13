@@ -16,10 +16,23 @@ void choose(val_t *j)
         parssing_min(j);
     for (int y = 0; size_actu_2 != y; y++) {
         pa(j);
-        if (size_actu_2 != y+1)
-            write(1, "pa ", 3);
-        else
-            write(1, "pa\n", 3);
+        if (size_actu_2 != y+1) {
+            j->buffer[j->buffer_int] = 'p';
+            j->buffer_int++;
+            j->buffer[j->buffer_int] = 'a';
+            j->buffer_int++;
+            j->buffer[j->buffer_int] = ' ';
+            j->buffer_int++;
+            initialisation_buffer(j);
+        } else {
+            j->buffer[j->buffer_int] = 'p';
+            j->buffer_int++;
+            j->buffer[j->buffer_int] = 'a';
+            j->buffer_int++;
+            j->buffer[j->buffer_int] = '\n';
+            j->buffer_int++;
+            initialisation_buffer(j);
+        }
     }
 }
 
@@ -42,9 +55,16 @@ void parssing_min(val_t *j)
             ra(j);
         else
             rra(j);
-    pb(j);
-    write(1, "pb ", 3);
+    set_pb(j);
     size_actu--;
+}
+
+void initialisation_buffer(val_t *j)
+{
+    if (j->buffer_int >= 795) {
+        write(1, j->buffer, j->buffer_int);
+        j->buffer_int = 0;
+    }
 }
 
 void create_struc(val_t *val, int argc)
