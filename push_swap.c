@@ -12,16 +12,15 @@ void choose(val_t *j)
     j->size = j->list_a + j->list_b;
     int size_actu_2 = j->size;
 
-    for (; j->size != 0; j->size--) {
+    for (; j->size != 0; j->size--)
         parssing_min(j);
-    }
     for (int y = 0; size_actu_2 != y; y++) {
         pa(j);
-        write(1, "pa", 2);
         if (size_actu_2 != y+1)
-            write(1, " ", 1);
+            write(1, "pa ", 3);
+        else
+            write(1, "pa\n", 3);
     }
-    write(1, "\n", 1);
 }
 
 void parssing_min(val_t *j)

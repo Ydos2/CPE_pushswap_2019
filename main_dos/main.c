@@ -18,7 +18,10 @@ int main (int argc, char **argv)
     create_struc(val, argc);
     initialise_struc(val, argc, argv, a);
     argc--;
-    choose(val);
+    if (argc != 1)
+        choose(val);
+    else
+        write(1, "\n", 1);
     free(val->array_bubble);
     free(val->l_a);
     free(val->l_b);
