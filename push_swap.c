@@ -9,7 +9,6 @@
 
 void choose(val_t *j)
 {
-    j->size = j->list_a + j->list_b;
     int size_actu_2 = j->size;
 
     for (; j->size != 0; j->size--)

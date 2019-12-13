@@ -10,6 +10,7 @@
 int main (int argc, char **argv)
 {
     int a = 0;
+    int verif = 0;
 
     if (argc == 1)
         return (84);
@@ -19,10 +20,11 @@ int main (int argc, char **argv)
     initialise_struc(val, argc, argv, a);
     argc--;
     val->buffer_int = 0;
-    if (argc != 1) {
+    verif = set_verification(val);
+    if (argc != 1 && verif == 1) {
         choose(val);
         write(1, val->buffer, val->buffer_int);
-    } else
+    } else if (verif == 1)
         write(1, "\n", 1);
     free(val->array_bubble);
     free(val->l_a);
