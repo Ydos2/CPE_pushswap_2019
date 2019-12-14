@@ -1,78 +1,69 @@
 ##
 ## EPITECH PROJECT, 2019
-## COMPILATION
+## Makefile
 ## File description:
 ## Makefile
 ##
 
-NAMELIB		= libmy.a
-DIRLIB		=./lib/
-DIRLIBMY		=./lib/my/
-DIR_TEST		=tests/
-DIRMAIN		=./main_dos/*.c
+CC        =    gcc
 
-CC		=	gcc
+SRC     =	src/push_swap.c		\
+            src/param_1.c			\
+            src/param_2.c			\
+            src/set_draw.c			\
+            src/set_main.c			\
 
-SRC		=	push_swap.c		\
-			param_1.c		\
-			param_2.c		\
-			set_main.c		\
-			set_draw.c
+OBJ     =	$(SRC:.c=.o) 			\
 
-SRC_TESTS	=	$(DIR_TEST)criterion.c
+COVERAGE     =     $(SRC:.c=.gcda)			\
+                $(MAIN_SRC:.c=.gcda)		\
+                $(TEST_SRC:.c=.gcda)		\
+                $(SRC:.c=.gcno)				\
+                $(MAIN_SRC:.c=.gcno)		\
+                $(TEST_SRC:.c=.gcno)		\
 
-SRC_O	=	push_swap.o		\
-			param_1.o		\
-			param_2.o		\
-			set_main.o		\
-			set_draw.o
+MAIN_SRC    =    src/main.c			\
 
-COMPIL		= $(CC) $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC)
-COMPIL_DEBUG		= $(CC) $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC) -g3
-COMPIL_TEST		= $(CC) $(SRC) $(SRC_TESTS) -g3 -L $(DIRLIB) $(DIRMAIN) $(DIRTEST)  --coverage -lcriterion -lmy -o $(EXEC_TEST)
-EXEC		= push_swap
-EXEC_TEST		= my_tests_push_swap
-RUN_TESTS	=	./$(EXEC_TEST)
-RUN_VALGRIND	=	valgrind --leak-resolution=high --num-callers=40 --track-origins=yes ./$(EXEC)
+MAIN_OBJ    =    $(MAIN_SRC:.c=.o)	\
 
-COVERAGE	=	gcovr --exclude tests/
-COVERAGE_BRANCH		=	gcovr --exclude tests/ -b
+CFLAGS    =    -I./include -Wall -Wextra -Werror --coverage
 
-all	: build_lib compilation clean
+TARGET    =    push_swap	\
+
+TEST_SRC     =     tests/criterion.c		\
+
+TEST_OBJ     =     $(TEST_SRC:.c=.o)
+
+TEST_TARGET     =     unit_tests
+
+LDFLAGS     =     -L./lib/ -lcriterion
+
+all: $(TARGET)
 
 build_lib:
-		cd $(DIRLIBMY) && make
+	cd lib/my/ && make
+	cp lib/my/libmy.a lib/
+	cp lib/my/my.h include/
 
-compilation:
-		$(COMPIL)
+$(TARGET): $(OBJ) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(MAIN_OBJ) -o $(TARGET)
 
-compilation_test:
-		$(COMPIL_TEST)
-
-compilation_debug:
-		$(COMPIL_DEBUG)
-
-run_test:
-		$(RUN_TESTS)
-		$(COVERAGE)
-		$(COVERAGE_BRANCH)
-
-run_valgrind:
-		$(RUN_VALGRIND)
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f $(SRC_O)
+	rm -f $(OBJ) $(MAIN_OBJ) $(TEST_OBJ) $(COVERAGE)
 
-test_clean:
-		rm -f *.gcda rm -f *.gcno
+fclean: clean
+	rm -f $(TARGET) $(TEST_TARGET)
 
-fclean: clean test_clean
-		rm -f $(EXEC) $(EXEC_TEST) $(DIRLIB)$(NAMELIB)
+re:    fclean all
 
-re: fclean all
+tests_build: $(OBJ) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(TEST_OBJ) -o $(TEST_TARGET)
 
-tests_run: build_lib compilation compilation_test run_test clean test_clean
+tests_run: tests_build
+	./$(TEST_TARGET)
+	gcovr --exclude tests/
 
-debug: build_lib compilation compilation_debug clean
-
-valgrind: build_lib compilation compilation_debug run_valgrind clean
+re_tests: fclean tests_run

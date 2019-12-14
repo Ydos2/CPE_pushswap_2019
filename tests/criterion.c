@@ -7,7 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "../include/my.h"
+#include "my.h"
 
 static void redirect_all_stdout(void)
 {
