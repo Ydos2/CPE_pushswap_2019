@@ -65,29 +65,3 @@ void rra(val_t *j)
     j->buffer_int++;
     initialisation_buffer(j);
 }
-
-void set_pb(val_t *j)
-{
-    pb(j);
-    j->buffer[j->buffer_int] = 'p';
-    j->buffer_int++;
-    j->buffer[j->buffer_int] = 'b';
-    j->buffer_int++;
-    j->buffer[j->buffer_int] = ' ';
-    j->buffer_int++;
-    initialisation_buffer(j);
-}
-
-int set_verification(val_t *j)
-{
-    int finish = 0;
-
-    j->size = j->list_a + j->list_b;
-    for (int verif = j->size, z = 0; verif != 1; verif--, z++)
-        if (j->l_a[z] > j->l_a[z+1]) {
-            finish = 1;
-            return (1);
-        }
-    write(1, "\n", 1);
-    return (0);
-}

@@ -14,24 +14,7 @@ void choose(val_t *j)
     for (; j->size != 0; j->size--)
         parssing_min(j);
     for (int y = 0; size_actu_2 != y; y++) {
-        pa(j);
-        if (size_actu_2 != y+1) {
-            j->buffer[j->buffer_int] = 'p';
-            j->buffer_int++;
-            j->buffer[j->buffer_int] = 'a';
-            j->buffer_int++;
-            j->buffer[j->buffer_int] = ' ';
-            j->buffer_int++;
-            initialisation_buffer(j);
-        } else {
-            j->buffer[j->buffer_int] = 'p';
-            j->buffer_int++;
-            j->buffer[j->buffer_int] = 'a';
-            j->buffer_int++;
-            j->buffer[j->buffer_int] = '\n';
-            j->buffer_int++;
-            initialisation_buffer(j);
-        }
+        set_pa(size_actu_2, j, y);
     }
 }
 
@@ -91,8 +74,5 @@ void initialise_struc(val_t *val, int argc, char **argv, int a)
             z = z * -1;
         val->array_bubble[j] = z;
     }
-    for (int o = 0; o != val->list_a; o++, a++)
-        val->l_a[o] = val->array_bubble[a];
-    for (int o = 0; o != val->list_b; o++, a++)
-        val->l_b[o] = val->array_bubble[a];
+    set_struct(val, a);
 }

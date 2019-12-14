@@ -8,12 +8,10 @@
 
 char my_compt(char *str)
 {
-
     char i = 0;
 
-    while (str[i] != '\0') {
+    while (str[i] != '\0')
         i++;
-    }
     return (i);
 }
 

@@ -8,22 +8,28 @@
 NAMELIB		= libmy.a
 DIRLIB		=./lib/
 DIRLIBMY		=./lib/my/
-DIRTEST		=./tests/*.c
+DIR_TEST		=tests/
 DIRMAIN		=./main_dos/*.c
+
+CC		=	gcc
 
 SRC		=	push_swap.c		\
 			param_1.c		\
-			param_2.c
+			param_2.c		\
+			set_main.c		\
+			set_draw.c
 
-SRC_TESTS	=	criterion.c
+SRC_TESTS	=	$(DIR_TEST)criterion.c
 
 SRC_O	=	push_swap.o		\
 			param_1.o		\
-			param_2.o
+			param_2.o		\
+			set_main.o		\
+			set_draw.o
 
-COMPIL		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC)
-COMPIL_DEBUG		= gcc $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC) -g3
-COMPIL_TEST		= gcc $(SRC) -g3 -L $(DIRLIB) $(DIRMAIN) $(DIRTEST) --coverage -lcriterion -lmy -l csfml-graphics -o $(EXEC_TEST)
+COMPIL		= $(CC) $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC)
+COMPIL_DEBUG		= $(CC) $(SRC) -L $(DIRLIB) $(DIRMAIN) -lmy -o $(EXEC) -g3
+COMPIL_TEST		= $(CC) $(SRC) $(SRC_TESTS) -g3 -L $(DIRLIB) $(DIRMAIN) $(DIRTEST)  --coverage -lcriterion -lmy -o $(EXEC_TEST)
 EXEC		= push_swap
 EXEC_TEST		= my_tests_push_swap
 RUN_TESTS	=	./$(EXEC_TEST)
@@ -32,9 +38,9 @@ RUN_VALGRIND	=	valgrind --leak-resolution=high --num-callers=40 --track-origins=
 COVERAGE	=	gcovr --exclude tests/
 COVERAGE_BRANCH		=	gcovr --exclude tests/ -b
 
-all	: make compilation clean
+all	: build_lib compilation clean
 
-make:
+build_lib:
 		cd $(DIRLIBMY) && make
 
 compilation:
@@ -65,8 +71,8 @@ fclean: clean test_clean
 
 re: fclean all
 
-tests_run: make compilation compilation_test run_test clean test_clean
+tests_run: build_lib compilation compilation_test run_test clean test_clean
 
-debug: make compilation compilation_debug clean
+debug: build_lib compilation compilation_debug clean
 
-valgrind: make compilation compilation_debug run_valgrind clean
+valgrind: build_lib compilation compilation_debug run_valgrind clean
