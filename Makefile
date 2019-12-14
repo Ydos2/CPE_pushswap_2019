@@ -7,7 +7,7 @@
 
 CC        =    gcc
 
-SRC     =	src/push_swap.c		\
+SRC     =	src/push_swap.c			\
             src/param_1.c			\
             src/param_2.c			\
             src/set_draw.c			\
@@ -28,7 +28,7 @@ MAIN_OBJ    =    $(MAIN_SRC:.c=.o)	\
 
 CFLAGS    =    -I./include -Wall -Wextra -Werror --coverage
 
-TARGET    =    push_swap	\
+TARGET    =    push_swap		\
 
 TEST_SRC     =     tests/criterion.c		\
 
@@ -36,7 +36,7 @@ TEST_OBJ     =     $(TEST_SRC:.c=.o)
 
 TEST_TARGET     =     unit_tests
 
-LDFLAGS     =     -L./lib/ -lcriterion
+LDFLAGS     =     -lcriterion
 
 all: $(TARGET)
 
